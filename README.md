@@ -16,7 +16,7 @@
 ### 1. 装依赖
 
 ```bash
-git clone <this-repo-url>
+git clone https://github.com/woai3c/hello-agent.git
 cd hello-agent
 npm install
 ```
