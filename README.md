@@ -2,7 +2,7 @@
 
 50 行跑通一个最小 AI agent —— 配套小册《从零打造一个 AI Agent CLI》的开篇示例。
 
-代码本身只有 50 行，但展示了 agent 最核心的形态：**模型 + 工具 + 多轮对话循环**。装好依赖、配好 `ANTHROPIC_API_KEY` 就能在终端里和它聊天，让它读你本地的文件、回答问题。
+代码本身只有 50 行，但展示了 agent 最核心的形态：**模型 + 工具 + 多轮对话循环**。装好依赖、配好 `DEEPSEEK_API_KEY` 就能在终端里和它聊天，让它读你本地的文件、回答问题。
 
 ## 特点
 
@@ -70,7 +70,7 @@ npm start
   [返回 312 字节]
 助手: 你的 package.json 里有以下依赖：
 - ai
-- @ai-sdk/anthropic
+- @ai-sdk/deepseek
 - zod
 ...
 
