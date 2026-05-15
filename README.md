@@ -1,6 +1,8 @@
 # Hello Agent
 
-50 行跑通一个最小 AI agent —— 配套小册《从零打造一个 AI Agent CLI》的开篇示例。
+> 配套小册《从零打造一个 AI Agent CLI（Build Your Own Agentic CLI）》第 1 章示例。
+
+50 行跑通一个最小 AI agent。
 
 代码本身只有 50 行，但展示了 agent 最核心的形态：**模型 + 工具 + 多轮对话循环**。装好依赖、配好 `DEEPSEEK_API_KEY` 就能在终端里和它聊天，让它读你本地的文件、回答问题。
 
@@ -99,18 +101,21 @@ npm start
 
 ## 这 50 行没做什么
 
-| 缺什么 | 后果 |
-|---|---|
-| **没有终端 UI** | 只能裸 readline；多行输入、上下移动、@ 文件补全都没有 |
-| **没有权限确认** | 如果加上 shell 工具，模型想跑命令直接就跑——没有"这操作我同意一下"这一步 |
-| **没有错误恢复** | 网络抖一下、模型返回 malformed tool input、长输出撑爆 context——任何一处崩，整个对话就死了 |
-| **只支持 DeepSeek** | 改用 Anthropic / OpenAI / Gemini 都要改代码 |
-| **只有一个工具** | 改文件、跑 shell、grep、列目录、抓网页这些都没有 |
-| **不会上下文压缩** | 多轮聊下来 messages 越积越长，几十轮就把 200K 上下文窗口塞满 |
-| **没有 prompt caching** | 每一轮系统提示词、对话历史都全量重算 token |
-| **没有 loop guard** | 模型万一陷入死循环，唯一的 brake 是 `stepCountIs(10)` 这个粗粒度上限 |
+下面这张表把"最小版做不了的事"和小册里讲清楚的章节一一对应——这也是这本小册接下来要补齐的"差距"：
 
-完整、生产级的实现见配套项目 [X-Code CLI](https://github.com/woai3c/x-code-cli)，对应小册《从零打造一个 AI Agent CLI》会一项项把这些短板填上。
+| 缺什么 | 后果 | 哪一章讲清楚 |
+|---|---|---|
+| **没有终端 UI** | 只能裸 readline；多行输入、上下移动、@ 文件补全都没有 | 第四部分（Ch.23-28 终端 UI） |
+| **没有权限确认** | 如果加上 shell 工具，模型想跑命令直接就跑——没有"这操作我同意一下"这一步 | Ch.29 三级权限模型 |
+| **没有错误恢复** | 网络抖一下、模型返回 malformed tool input、长输出撑爆 context——任何一处崩，整个对话就死了 | Ch.11 错误恢复、Ch.17 工具结果处理 |
+| **只支持一家供应商** | 改用 OpenAI / Anthropic / Gemini 都要改代码；各家的 cache_control / thinking / reasoning_effort 字段差异要单独适配 | Ch.09 多供应商支持 |
+| **只有一个工具** | 改文件、跑 shell、grep、列目录、抓网页这些都没有 | 第三部分（Ch.12-22 工具系统） |
+| **不会上下文压缩** | 多轮聊下来 messages 越积越长，几十轮就把 200K 上下文窗口塞满 | Ch.31 上下文压缩 |
+| **没有 prompt caching** | 每一轮系统提示词、对话历史都全量重算 token | Ch.33 Prompt caching |
+| **没有 loop guard** | 模型万一陷入死循环，唯一的 brake 是 `stepCountIs(10)` 这个粗粒度上限 | Ch.32 Loop guard |
+| **没有思考模式 / 多模态附件 / 子 agent / Plan Mode / 知识系统 / 会话恢复** | 高级模型的能力无法启用；复杂任务无法委派给子 agent；上一次会话的进度下次启动后无法恢复 | Ch.19-22（子 agent / todoWrite / Plan Mode）、Ch.34-36（思考模式 / 多模态 / 知识与会话系统） |
+
+完整、生产级的实现见配套项目 [X-Code CLI](https://github.com/woai3c/x-code-cli)——小册会以它为主线，把上面这些短板一项项填上。
 
 ## License
 
